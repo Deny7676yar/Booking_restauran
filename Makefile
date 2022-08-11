@@ -27,6 +27,6 @@ pre-commit:
 
 .PHONY: compose-up
 compose-up:
-	docker-compose up
+	docker-compose up -d
 
 .DEFAULT_GOAL := run

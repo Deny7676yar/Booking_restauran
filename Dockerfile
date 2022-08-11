@@ -33,7 +33,7 @@ ENV TZ=Europe/Moscow
 
 EXPOSE 8000
 
-ENV REGUSER_STORE=mem
+ENV RESTAURANT_STORE=mem
 
 CMD ["./main"]
 

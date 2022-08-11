@@ -4,7 +4,7 @@ services:
 
   registry:
     image: registry:2
-    container_name: registry
+    container_name: registry2
     ports:
       - 5000:5000
     restart: always
@@ -13,20 +13,20 @@ services:
 
   postgres:
     image: postgres:12
-    container_name: postgres
+    container_name: postgresql
     restart: always
     ports:
       - 5432:5432
     volumes:
       - ./sql:/docker-entrypoint-initdb.d
-      #- /opt/databases/reguser_postgres_ls8:/var/lib/postgresql/data
+      #- /opt/databases/booking_postgres_ls8:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: 1110
       POSTGRES_DB: test
     networks:
       - bookingrestnet
 
-  URL_shortener:
+  Booking_restaurant:
     image: 127.0.0.1:5000/booking_restaurant:latest
     container_name: booking_restaurant
     build: .
@@ -34,7 +34,7 @@ services:
     ports:
       - 8000:8000
     environment:
-      PG_DSN: "postgres://postgres:1110@postgres/test?sslmode=disable"
+      PG_DSN: "postgres://postgres:1110@postgres/rest?sslmode=disable"
       LINK_STORE: pg
     depends_on:
       - registry
